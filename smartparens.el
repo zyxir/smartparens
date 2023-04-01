@@ -9650,23 +9650,11 @@ has been created."
 
 ;; global initialization
 (defadvice delete-backward-char (before sp-delete-pair-advice activate)
-  (unless
-      ;; If there is an active region, and `delete-active-region' is non-nil, just do the
-      ;; vanilla deletion without any advice.
-      (and (use-region-p)
-           delete-active-region
-           (= n 1))
-    (save-match-data
-      (sp-delete-pair (ad-get-arg 0)))))
+  (save-match-data
+    (sp-delete-pair (ad-get-arg 0))))
 (defadvice haskell-indentation-delete-backward-char (before sp-delete-pair-advice activate)
-  (unless
-      ;; If there is an active region, and `delete-active-region' is non-nil, just do the
-      ;; vanilla deletion without any advice.
-      (and (use-region-p)
-           delete-active-region
-           (= n 1))
-    (save-match-data
-      (sp-delete-pair (ad-get-arg 0)))))
+  (save-match-data
+    (sp-delete-pair (ad-get-arg 0))))
 (sp--set-base-key-bindings)
 (sp--update-override-key-bindings)
 
